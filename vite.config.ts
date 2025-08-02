@@ -21,6 +21,6 @@ export default defineConfig({
     },
   },
   preview: {
-    allowedHosts: ["cairix.org", "*.cairix.org"],
+    allowedHosts: ["www.cairix.org", "cairix.org", "*.cairix.org"],
   },
 });
