@@ -20,4 +20,7 @@ export default defineConfig({
       },
     },
   },
+  preview: {
+    allowedHosts: ["cairix.org", "*.cairix.org"],
+  },
 });
