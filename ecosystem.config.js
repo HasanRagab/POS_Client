@@ -2,7 +2,7 @@ export const apps = [
     {
         name: 'frontend',
         script: 'npm',
-        args: 'run preview', 
+        args: 'run dev', 
         instances: 1,
         max_memory_restart: '300M',
         autorestart: true,
