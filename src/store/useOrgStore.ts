@@ -16,9 +16,15 @@ export const useOrgStore = create<OrgState>((set) => ({
   org: null,
   getOrgBySubdomain: async (subdomain) => {
     try {
-      const res = await OrganizationsService.organizationControllerGetBySubdomain(subdomain);
-      if (res.data) {
-        set({ org: res.data as Organization });
+      const res = await OrganizationsService.getOrgBySubdomain(subdomain);
+      if (res) {
+        set({ 
+          org: {
+            id: res.id,
+            name: res.businessName,
+            subdomain: res.subdomain
+          }
+        });
       } else {
         set({ org: null });
       }

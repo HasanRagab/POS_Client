@@ -12,39 +12,27 @@ import {
   Calculator,
   Percent
 } from 'lucide-react';
-import { useState, useEffect } from 'react';
-import { AuthService } from '@/api';
+import { useAuthStore } from '@/store/useAuthStore';
 
 export const Layout = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [user, setUser] = useState<any>(null);
-
-  useEffect(() => {
-    const loadUser = async () => {
-      try {
-        const userData = await AuthService.getCurrentUser();
-        setUser(userData);
-      } catch (error) {
-        console.error('Failed to load user data:', error);
-      }
-    };
-    loadUser();
-  }, []);
+  const { user, logout } = useAuthStore();
 
   const handleLogout = () => {
-    window.location.reload();
+    logout();
+    navigate('/login');
   };
 
   const navigationItems = [
-    { path: '/pos', label: 'POS', icon: Store },
-    { path: '/admin', label: 'Admin', icon: Settings },
-    { path: '/customers', label: 'Customers', icon: Users },
-    { path: '/inventory', label: 'Inventory', icon: Package },
-    { path: '/taxes', label: 'Taxes', icon: Calculator },
-    { path: '/discounts', label: 'Discounts', icon: Percent },
-    { path: '/reports', label: 'Reports', icon: BarChart3 },
-    { path: '/settings', label: 'Settings', icon: Cog },
+    { path: '/app/pos', label: 'POS', icon: Store },
+    { path: '/app/admin', label: 'Admin', icon: Settings },
+    { path: '/app/customers', label: 'Customers', icon: Users },
+    { path: '/app/inventory', label: 'Inventory', icon: Package },
+    { path: '/app/taxes', label: 'Taxes', icon: Calculator },
+    { path: '/app/discounts', label: 'Discounts', icon: Percent },
+    { path: '/app/reports', label: 'Reports', icon: BarChart3 },
+    { path: '/app/settings', label: 'Settings', icon: Cog },
   ];
 
   return (
@@ -74,7 +62,7 @@ export const Layout = () => {
             {user && (
               <div className="flex items-center space-x-2">
                 <User className="w-4 h-4" />
-                <span className="text-sm">{user.email}</span>
+                <span className="text-sm">{user.name || user.email}</span>
               </div>
             )}
             <Button variant="outline" onClick={handleLogout}>

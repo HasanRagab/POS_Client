@@ -2,21 +2,22 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { ApiResponse } from '../models/ApiResponse';
 import type { CreateOrgDto } from '../models/CreateOrgDto';
+import type { OrgServiceResponse } from '../models/OrgServiceResponse';
 import type { UpdateOrgDto } from '../models/UpdateOrgDto';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
 export class OrganizationsService {
     /**
+     * Get org by subdomain
      * @param subdomain
-     * @returns ApiResponse Organization found by subdomain
+     * @returns OrgServiceResponse Organization found by subdomain
      * @throws ApiError
      */
-    public static organizationControllerGetBySubdomain(
+    public static getOrgBySubdomain(
         subdomain: string,
-    ): CancelablePromise<ApiResponse> {
+    ): CancelablePromise<OrgServiceResponse> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/orgs/{subdomain}',
@@ -26,23 +27,25 @@ export class OrganizationsService {
         });
     }
     /**
-     * @returns ApiResponse Organization found by ID
+     * Get org by current user’s orgId
+     * @returns OrgServiceResponse Organization found by ID
      * @throws ApiError
      */
-    public static organizationControllerGetById(): CancelablePromise<ApiResponse> {
+    public static getOrgById(): CancelablePromise<OrgServiceResponse> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/orgs',
         });
     }
     /**
+     * Create a new organization
      * @param requestBody
-     * @returns ApiResponse Organization created successfully
+     * @returns OrgServiceResponse Organization created successfully
      * @throws ApiError
      */
-    public static organizationControllerCreate(
+    public static createOrg(
         requestBody: CreateOrgDto,
-    ): CancelablePromise<ApiResponse> {
+    ): CancelablePromise<OrgServiceResponse> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/orgs',
@@ -51,13 +54,14 @@ export class OrganizationsService {
         });
     }
     /**
+     * Update current user’s organization
      * @param requestBody
-     * @returns ApiResponse Organization updated successfully
+     * @returns OrgServiceResponse Organization updated successfully
      * @throws ApiError
      */
-    public static organizationControllerUpdate(
+    public static updateOrg(
         requestBody: UpdateOrgDto,
-    ): CancelablePromise<ApiResponse> {
+    ): CancelablePromise<OrgServiceResponse> {
         return __request(OpenAPI, {
             method: 'PATCH',
             url: '/api/orgs',
@@ -66,10 +70,11 @@ export class OrganizationsService {
         });
     }
     /**
-     * @returns ApiResponse Organization deleted successfully
+     * Soft delete current user’s organization
+     * @returns OrgServiceResponse Organization deleted successfully
      * @throws ApiError
      */
-    public static organizationControllerRemove(): CancelablePromise<ApiResponse> {
+    public static deleteOrg(): CancelablePromise<OrgServiceResponse> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/orgs',
