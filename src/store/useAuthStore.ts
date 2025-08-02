@@ -1,4 +1,4 @@
-import { AuthService, LoginDto } from "@/api";
+import { AuthService, LoginDto, OrganizationsService } from "@/api";
 import { create } from "zustand";
 
 interface AuthState {
@@ -13,7 +13,11 @@ export const useAuthStore = create<AuthState>((set) => ({
   permissions: [],
   user: null,
   login: async (data) => {
-    const user = await AuthService.loginUser(data);
+    const orgSubdomain = window.location.hostname.split('.')[0];
+    const orgId = await OrganizationsService.organizationControllerGetBySubdomain(orgSubdomain)
+      .then(res => res.data?.id)
+      .catch(() => null);
+    const user = await AuthService.loginUser(orgId, data)
     set({ isAuthenticated: true, user });
   },
 }));

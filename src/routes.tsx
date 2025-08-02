@@ -1,61 +1,46 @@
-import { createBrowserRouter, Navigate } from 'react-router-dom';
-import { ProtectedRoute } from '@/components/ProtectedRoute';
-import { Layout } from '@/components/layout/Layout';
-import { POSInterface } from '@/components/POSInterface';
-import { AdminDashboard } from '@/components/AdminDashboard';
-import { CustomerManagement } from '@/components/CustomerManagement';
-import { InventoryManagement } from '@/components/InventoryManagement';
-import { TaxManagement } from '@/components/TaxManagement';
-import { DiscountManagement } from '@/components/DiscountManagement';
-import { SalesReports } from '@/components/SalesReports';
-import { Settings } from '@/components/Settings';
+import { createBrowserRouter, Navigate } from "react-router-dom";
+import { Layout } from "@/components/layout/Layout";
 
 export const router = createBrowserRouter([
   {
-    path: '/',
-    element: <ProtectedRoute />,
+    path: "/",
+    element: <Layout />,
     children: [
       {
-        path: '/',
-        element: <Layout />,
-        children: [
-          {
-            index: true,
-            element: <Navigate to="/pos" replace />,
-          },
-          {
-            path: 'pos',
-            element: <POSInterface />,
-          },
-          {
-            path: 'admin',
-            element: <AdminDashboard />,
-          },
-          {
-            path: 'customers',
-            element: <CustomerManagement />,
-          },
-          {
-            path: 'inventory',
-            element: <InventoryManagement />,
-          },
-          {
-            path: 'taxes',
-            element: <TaxManagement />,
-          },
-          {
-            path: 'discounts',
-            element: <DiscountManagement />,
-          },
-          {
-            path: 'reports',
-            element: <SalesReports />,
-          },
-          {
-            path: 'settings',
-            element: <Settings />,
-          },
-        ],
+        index: true,
+        element: <Navigate to="/pos" replace />,
+      },
+      {
+        path: "pos",
+        element: <div>POS Interface</div>,
+      },
+      {
+        path: "admin",
+        element: <div>Admin Interface</div>,
+      },
+      {
+        path: "customers",
+        element: <div>Customer Management Interface</div>,
+      },
+      {
+        path: "inventory",
+        element: <div>Inventory Management Interface</div>,
+      },
+      {
+        path: "taxes",
+        element: <div>Tax Management Interface</div>,
+      },
+      {
+        path: "discounts",
+        element: <div>Discount Management Interface</div>,
+      },
+      {
+        path: "reports",
+        element: <div>Sales Reports Interface</div>,
+      },
+      {
+        path: "settings",
+        element: <div>Settings Interface</div>,
       },
     ],
   },

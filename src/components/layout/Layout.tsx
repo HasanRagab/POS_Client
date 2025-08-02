@@ -1,6 +1,5 @@
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { LocationHeader } from '@/components/LocationHeader';
 import { 
   Store, 
   Settings, 
@@ -13,8 +12,8 @@ import {
   Calculator,
   Percent
 } from 'lucide-react';
-// import { authService } from '@/lib/auth';
 import { useState, useEffect } from 'react';
+import { AuthService } from '@/api';
 
 export const Layout = () => {
   const location = useLocation();
@@ -24,8 +23,8 @@ export const Layout = () => {
   useEffect(() => {
     const loadUser = async () => {
       try {
-        // const userData = await authService.whoami();
-        // setUser(userData);
+        const userData = await AuthService.getCurrentUser();
+        setUser(userData);
       } catch (error) {
         console.error('Failed to load user data:', error);
       }
@@ -34,16 +33,7 @@ export const Layout = () => {
   }, []);
 
   const handleLogout = () => {
-    // authService.logout();
     window.location.reload();
-  };
-
-  const checkAuth = async () => {
-    try {
-      // await authService.whoami();
-    } catch (error) {
-      handleLogout();
-    }
   };
 
   const navigationItems = [
@@ -80,8 +70,6 @@ export const Layout = () => {
           </div>
 
           <div className="flex items-center space-x-6">
-            {/* Location Header */}
-            <LocationHeader onLocationChange={checkAuth} />
 
             {user && (
               <div className="flex items-center space-x-2">
