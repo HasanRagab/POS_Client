@@ -1,6 +1,4 @@
 import { useEffect } from "react";
-// import { RouterProvider } from "react-router-dom";
-// import { router } from "./routes";
 import { useAuthStore } from "@/store/useAuthStore";
 import { Toaster } from "react-hot-toast";
 import { SubdomainDebugger } from "@/components/dev/SubdomainDebugger";
@@ -11,16 +9,13 @@ function App() {
   const { checkAuth } = useAuthStore();
 
   useEffect(() => {
-    // Initialize API configuration and token management
     initializeApi();
-    
-    // Check authentication status
     checkAuth();
   }, [checkAuth]);
 
   return (
     <ErrorBoundary>
-      {/* <RouterProvider router={router} /> */}
+
       <SubdomainDebugger />
       <Toaster 
         position="top-right"
