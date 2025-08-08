@@ -20,8 +20,4 @@ export default defineConfig({
       },
     },
   },
-  build: {
-    outDir: "www",
-    emptyOutDir: true,
-  },
 });
